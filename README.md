@@ -1,5 +1,7 @@
 # PresentacionParticulas
 
+[Pagina Desplegada](https://lolarenzo2000.github.io/PresentacionParticulas/)
+
 ## Wireframes en papel
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/bb43877f-628c-4b4f-8da9-713a8f98c14c" />
 <img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/cc13bae4-067c-4a6b-ac45-82111a3ae270" />
