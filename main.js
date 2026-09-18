@@ -18,7 +18,7 @@ var N = 3600;
 var GOLD = 2.399963229728653;
 
 /* ---------- shape 1: pista de carreras ---------- */
-var TRACK_RUNNERS = 60, TRACK_LANES = 3;
+var TRACK_RUNNERS = 60, TRACK_LANES = 5;
 function shapeTrack(i,n,t){
   var trackN = n - TRACK_RUNNERS;
   if(i < trackN){
@@ -37,7 +37,7 @@ function shapeTrack(i,n,t){
     var angle = t*0.42 + (hash(i,4)-0.5)*0.06;
     var cx = rx2*Math.cos(angle), cy = ry2*Math.sin(angle);
     var ox = (hash(i,5)-0.5)*0.12, oy=(hash(i,6)-0.5)*0.12, oz=(hash(i,7)-0.5)*0.12;
-    return [cx+ox, cy+oy, oz];
+    return [cx*1.1+ox, cy*1.1+oy, oz];
   }
 }
 function colorTrack(i,n){
@@ -102,10 +102,10 @@ function shapeRiver(i,n,t){
   var line = i % 3;
   var idx = Math.floor(i/3);
   var perLine = Math.floor(n/3);
-  var L = 5.2;
+  var L = 8;
   var s = idx/perLine;
   var y = ((s*L - t*0.55) % L + L) % L - L/2;
-  var offX = (line-1)*0.85;
+  var offX = (line-1)*2;
   var x = offX + 0.42*Math.sin(y*1.3 + line*2.0) + (hash(i,11)-0.5)*0.05;
   var z = (hash(i,12)-0.5)*0.12;
   return [x,y,z];
@@ -144,7 +144,7 @@ function colorFireworks(i,n){
 function shapeBlobCircle(i,n,t){
   var theta = (i/n)*Math.PI*2;
   var noise = 0.5*Math.sin(3*theta + t*0.22) + 0.3*Math.sin(7*theta - t*0.15) + 0.2*Math.sin(11*theta + t*0.09);
-  var R = 1.55 + noise*0.55;
+  var R = 3 + noise*0.55;
   var x = R*Math.cos(theta), y=R*Math.sin(theta);
   var z = (hash(i,15)-0.5)*0.1;
   return [x,y,z];
@@ -159,7 +159,7 @@ function colorBlobCircle(i,n){
 function shapeFlower(i,n,t){
   var theta = (i/n)*Math.PI*2;
   var k = 5;
-  var r = 0.28 + 1.55*Math.abs(Math.cos(k*theta));
+  var r = 1.8 + 1.55*Math.abs(Math.cos(k*theta));
   var rot = t*0.2;
   var x = r*Math.cos(theta), y = r*Math.sin(theta);
   var rr = rotZ(x,y,rot); x=rr[0]; y=rr[1];
@@ -180,10 +180,10 @@ function shapeLoop(i,n,t){
   var perLane = Math.floor(n/LOOP_LANES);
   var s = idx/perLane;
   var theta = (s*Math.PI*2 + t*0.35) % (Math.PI*2);
-  var base = 1.0 + 1.7*Math.cos(theta);
+  var base = 0.5 + 3.7*Math.cos(theta);
   var laneOffset = (lane-1.5)*0.16;
   var r = base + laneOffset;
-  var x = r*Math.cos(theta)*0.75, y = r*Math.sin(theta)*0.9;
+  var x = r*Math.cos(theta)*2-4, y = r*Math.sin(theta)*1.5;
   var z = (hash(i,17)-0.5)*0.1;
   return [x,y,z];
 }
@@ -201,7 +201,7 @@ function shapeMobius(i,n,t){
   var y = (R + v*0.65*Math.cos(u/2)) * Math.sin(u);
   var z = v*0.65*Math.sin(u/2);
   var rr = rotX(y,z, t*0.14); y=rr[0]; z=rr[1];
-  return [x,y,z];
+  return [x*2,y*2,z];
 }
 function colorMobius(i,n){
   var v = (hash(i,18)*2-1);
